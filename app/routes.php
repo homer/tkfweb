@@ -13,8 +13,48 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('home');
 });
-Route::get('about', function(){
-  return 'About content goes here.';
+
+// Federasyon sayfalari
+Route::get('/federasyon/tarihce', function(){
+  return  View::make('federasyon/tarihce');
+});
+Route::get('/federasyon/yonetim', function(){
+  return  View::make('federasyon/yonetim');
+});
+Route::get('/federasyon/kurullar', function(){
+  return  View::make('federasyon/kurullar');
+});
+Route::get('/federasyon/anastatu', function(){
+  return  View::make('federasyon/anastatu');
+});
+Route::get('/federasyon/talimatlar', function(){
+  return  View::make('federasyon/talimatlar');
+});
+Route::get('/federasyon/olimpik-sporcular', function(){
+  return  View::make('federasyon/olimpik-sporcular');
+});
+Route::get('/federasyon/milli-takim', function(){
+  return  View::make('federasyon/milli-takim');
+});
+Route::get('/federasyon/il-temsilcilikleri', function(){
+  return  View::make('federasyon/il-temsilcilikleri');
+});
+Route::get('/federasyon/gsb-birimleri', function(){
+  return  View::make('federasyon/gsb-birimleri');
+});
+Route::get('/federasyon/il-mudurlukleri', function(){
+  return  View::make('federasyon/il-mudurlukleri');
+});
+Route::get('/federasyon/federasyonlar', function(){
+  return  View::make('federasyon/federasyonlar');
+});
+
+// Medya Arsivi
+Route::get('/medya/foto-galeri', function(){
+  return  View::make('medya/foto-galeri');
+});
+Route::get('/medya/video-galeri', function(){
+  return  View::make('medya/video-galeri');
 });
