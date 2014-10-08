@@ -58,3 +58,34 @@ Route::get('/medya/foto-galeri', function(){
 Route::get('/medya/video-galeri', function(){
   return  View::make('medya/video-galeri');
 });
+
+// Admin
+Route::get('/vezir/yeni-sporcu', function(){
+  return  View::make('vezir/yeni-sporcu')->with('clubs',array(
+    'Club A',
+    'Club B',
+    'Club C',
+    'Club D',
+    'Club E'
+  ));
+});
+Route::post('/vezir/yeni-sporcu', function(){
+  $sportsman = new Sportsmen();
+  $sportsman -> first_name = Input::get('f_name');
+  $sportsman -> last_name = Input::get('l_name');
+  $sportsman -> club_id = 1;
+  $sportsman -> save();
+
+  return  View::make('vezir/yeni-sporcu')->with('s_name',$sportsman->first_name);
+});
+
+Route::get('/vezir/yeni-kulup', function(){
+  return  View::make('vezir/yeni-kulup');
+});
+Route::post('/vezir/yeni-kulup', function(){
+  $club = new Club();
+  $club -> club_name = Input::get('c_name');
+  $club -> save();
+
+  return  View::make('vezir/yeni-kulup')->with('club',$club);
+});
