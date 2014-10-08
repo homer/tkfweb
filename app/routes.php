@@ -61,7 +61,7 @@ Route::get('/medya/video-galeri', function(){
 
 // Admin
 Route::get('/vezir/yeni-sporcu', function(){
-  $clubs = DB::table('clubs')->lists('club_name');
+  $clubs = DB::table('clubs')->orderBy('club_name')->lists('club_name','id');
   return  View::make('vezir/yeni-sporcu')->with('clubs',$clubs);
 });
 Route::post('/vezir/yeni-sporcu', function(){
