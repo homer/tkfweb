@@ -96,18 +96,40 @@ Route::get('/medya/video-galeri', function(){
 });
 
 // Admin
-Route::get('/vezir/yeni-kullanici',function(){
-  return View::make('vezir/yeni-kullanici');
+Route::get('/vezir/giris',function(){
+  return View::make('vezir/giris');
 });
-Route::post('/vezir/yeni-kullanici',function(){
-  $user = new User();
-  $user -> email = Input::get('email');
-  $user -> username = Input::get('username');
-  $user -> password = Hash::make(Input::get('password'));
-  $user -> save();
+Route::post('/vezir/giris',function(){
+  $credentials = Input::only('username','password');
+  if(Auth::attempt($credentials)){
+    return Redirect::intended('/vezir/yeni-kullanici');
+  }
+  return Redirect::to('vezir/giris');
+});
 
-  return "Kayit basariyla gerceklesti";
+Route::get('/vezir/cikis',function(){
+  Auth::logout();
+  return View::make('vezir/cikis');
 });
+
+Route::get('/vezir/yeni-kullanici',array(
+  'before' => 'auth',
+  function(){
+    return View::make('vezir/yeni-kullanici');
+  }
+));
+Route::post('/vezir/yeni-kullanici',array(
+  'before' => 'auth',
+  function(){
+    $user = new User();
+    $user -> email = Input::get('email');
+    $user -> username = Input::get('username');
+    $user -> password = Hash::make(Input::get('password'));
+    $user -> save();
+
+    return "Kayit basariyla gerceklesti";
+  }
+));
 
 Route::get('/vezir/yeni-sporcu', function(){
   $clubs = DB::table('clubs')->orderBy('club_name')->lists('club_name','id');
