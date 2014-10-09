@@ -96,6 +96,19 @@ Route::get('/medya/video-galeri', function(){
 });
 
 // Admin
+Route::get('/vezir/yeni-kullanici',function(){
+  return View::make('vezir/yeni-kullanici');
+});
+Route::post('/vezir/yeni-kullanici',function(){
+  $user = new User();
+  $user -> email = Input::get('email');
+  $user -> username = Input::get('username');
+  $user -> password = Hash::make(Input::get('password'));
+  $user -> save();
+
+  return "Kayit basariyla gerceklesti";
+});
+
 Route::get('/vezir/yeni-sporcu', function(){
   $clubs = DB::table('clubs')->orderBy('club_name')->lists('club_name','id');
   return  View::make('vezir/yeni-sporcu')->with('clubs',$clubs);
